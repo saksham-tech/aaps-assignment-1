@@ -1,0 +1,60 @@
+A prefix sum array is an array where each element at index i stores the sum of all elements from index 0 to i of the original array.
+
+Given an array arr:
+
+python
+Copy
+Edit
+arr = [3, 5, 2, 6]
+The prefix sum array will be:
+
+python
+Copy
+Edit
+prefix = [3, 8, 10, 16]
+Here’s how:
+
+prefix[0] = arr[0] = 3
+
+prefix[1] = arr[0] + arr[1] = 3 + 5 = 8
+
+prefix[2] = arr[0] + arr[1] + arr[2] = 10
+
+prefix[3] = arr[0] + arr[1] + arr[2] + arr[3] = 16
+
+
+
+def prefix_sum(arr):
+    prefix = [0] * len(arr)
+    prefix[0] = arr[0]
+    for i in range(1, len(arr)):
+        prefix[i] = prefix[i - 1] + arr[i]
+    return prefix
+
+
+Applications of Prefix Sum:
+1. Range Sum Queries (in O(1) time)
+Want to find the sum of elements from index l to r?
+
+Using prefix sum:
+
+python
+Copy
+Edit
+sum_lr = prefix[r] - prefix[l - 1] if l > 0 else prefix[r]
+
+
+2. Counting Problems
+Used in:
+
+Counting subarrays with a given sum
+
+Number of even/odd elements up to a certain point
+
+Prefix XOR (same concept but with XOR instead of sum)
+
+3. Optimizing Brute Force
+Avoids looping multiple times for repeated range sum queries. Example: In brute force, O(n*q) → With prefix sum: O(n + q)
+
+4. 2D Prefix Sums
+Used in image processing, grid-based games, matrix sum queries.

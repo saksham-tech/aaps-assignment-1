@@ -1,0 +1,46 @@
+It involves creating a "window" (usually defined by two pointers) that slides over the input to check for certain conditions without re-computing everything from scratch each time.
+
+You start with a window (a subrange of elements).
+
+Then you move it forward (left → right), adding the next element and removing the previous one from consideration.
+
+This gives better time complexity than a nested loop (O(n²)).
+
+Example Use Case: Max Sum of Subarray of Size k
+python
+Copy
+Edit
+arr = [1, 2, 3, 4, 5]
+k = 3
+
+# Sliding Window Output → max sum: 12 (subarray: [3, 4, 5])
+
+
+def max_sum(arr, k):
+    window_sum = sum(arr[:k])
+    max_sum = window_sum
+    
+    for i in range(k, len(arr)):
+        window_sum += arr[i] - arr[i - k]
+        max_sum = max(max_sum, window_sum)
+    
+    return max_sum
+Time complexity: O(n)
+
+1. Longest Substring Without Repeating Characters
+Problem: Find the length of the longest substring without repeating characters.
+
+
+def lengthOfLongestSubstring(s):
+    char_set = set()
+    l = 0
+    max_len = 0
+    
+    for r in range(len(s)):
+        while s[r] in char_set:
+            char_set.remove(s[l])
+            l += 1
+        char_set.add(s[r])
+        max_len = max(max_len, r - l + 1)
+    
+    return max_len
